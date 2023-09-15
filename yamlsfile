@@ -19,3 +19,20 @@ compartments:
     - name : print
       debug:
        msg: file created
+
+
+Install Libraries
+
+---
+ - hosts: localhost
+   become: true
+   tasks:
+   - name: install packages
+     yum: name={{item}} state=latest
+     loop:
+      - podman
+      - git
+      - htop
+   - name : print message
+     debug:
+       msg: "packages installed here in {{inventory_hostname}}"
