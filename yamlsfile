@@ -105,20 +105,6 @@ Install Libraries
         - testuser21
   -  name: print users
      debug:
-        msg: "Print the users
+        msg: "Print the users"
 
 
-- hosts: all
-  connection: local
-  become: yes
-  tasks:
-    - name: install docker
-      command: yum install -y docker
-    - name: deploy nginx docker container
-      command: docker run -d  --name testapache  -p 8085:80 httpd
-    - name: list all containers
-      command: docker  ps -a
-    - name: verify service working
-      command: curl {{ansible_hostname}}:8085
-    - name: remove container
-      command : docker rm -f testnginx
