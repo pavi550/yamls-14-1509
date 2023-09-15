@@ -36,3 +36,15 @@ Install Libraries
    - name : print message
      debug:
        msg: "packages installed here in {{inventory_hostname}}"
+
+
+- hosts: localhost
+  become: true
+  tasks:
+  - name : install http
+    yum: name=httpd state=latest
+  - name: start and enable httpd
+    service: name=httpd state=restarted enabled=yes
+  handlers:
+  - name: restart apache
+    service: name=httpd state=restarted
